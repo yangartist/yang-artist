@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yang — Artist Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--text:#1a1a1a;--muted:#666;--pink:#e91e8c;--green:#4caf50;--border:#e8e8e8}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a1a;line-height:1.6}
+header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.98);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+nav{max-width:1400px;margin:0 auto;padding:1.2rem 3rem;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--text);text-decoration:none;letter-spacing:2px}
+.logo span{color:var(--pink)}
+.nav-links{display:flex;gap:3rem;list-style:none}
+.nav-links a{color:var(--text);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;transition:color 0.3s}
+.nav-links a:hover{color:var(--pink)}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:10rem 2rem 5rem}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,7vw,6rem);font-weight:400;margin-bottom:1.5rem;letter-spacing:1px;line-height:1.1}
+.hero h1 .freedom{background:linear-gradient(90deg,var(--pink),#ff6b9d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:1.1rem;color:var(--muted);max-width:600px;margin-bottom:3rem}
+.hero-buttons{display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center}
+.btn-view{padding:1.2rem 2.5rem;background:linear-gradient(135deg,var(--green),var(--pink));color:white;text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;border:none;transition:transform 0.3s,box-shadow 0.3s}
+.btn-view:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(233,30,140,0.3)}
+.btn-touch{padding:1.2rem 2.5rem;background:transparent;color:var(--text);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;border:1px solid var(--border);transition:all 0.3s}
+.btn-touch:hover{border-color:var(--pink);color:var(--pink)}
+.section{max-width:1400px;margin:0 auto;padding:4rem 2rem}
+.section-title{font-family:'Playfair Display',serif;font-size:3rem;font-weight:400;margin-bottom:1rem;text-align:center;letter-spacing:1px}
+.section-title .gradient{background:linear-gradient(90deg,var(--green),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.section-subtitle{text-align:center;color:var(--muted);font-size:1rem;margin-bottom:3rem}
+.filter-buttons{display:flex;gap:1rem;justify-content:center;margin-bottom:3rem;flex-wrap:wrap}
+.filter-btn{padding:0.8rem 2rem;background:transparent;border:1px solid var(--border);color:var(--text);font-size:0.8rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;font-family:'Inter',sans-serif}
+.filter-btn.active,.filter-btn:hover{background:linear-gradient(135deg,var(--green),var(--pink));color:white;border-color:transparent}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2rem}
+.artwork{background:white;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.08);transition:transform 0.3s,box-shadow 0.3s;cursor:pointer}
+.artwork:hover{transform:translateY(-5px);box-shadow:0 15px 40px rgba(0,0,0,0.15)}
+.artwork .img-frame{padding:12px;background:white}
+.artwork img{width:100%;height:380px;object-fit:cover;display:block;border:1px solid #f0f0f0}
+.artwork-info{padding:1.5rem;text-align:center}
+.artwork-info h3{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:400;margin-bottom:0.5rem}
+.artwork-info p{color:var(--muted);font-size:0.9rem;margin-bottom:1rem;font-style:italic}
+.category-tag{display:inline-block;padding:0.4rem 1.2rem;background:linear-gradient(135deg,var(--green),var(--pink));color:white;font-size:0.75rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;border-radius:20px}
+.guardian-section{background:#fafafa;padding:6rem 2rem;text-align:center}
+.guardian-section h2{font-family:'Playfair Display',serif;font-size:3rem;margin-bottom:1.5rem}
+.guardian-section h2 .gradient{background:linear-gradient(90deg,var(--green),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.guardian-section p{max-width:600px;margin:0 auto;color:var(--muted);font-size:1.1rem;line-height:1.8}
+.guardian-frog-img{max-width:400px;margin:2rem auto;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.15)}
+.resume-section{max-width:1000px;margin:0 auto;padding:6rem 2rem}
+.resume-content{display:flex;align-items:center;gap:4rem}
+.resume-text{flex:1}
+.resume-text h2{font-family:'Playfair Display',serif;font-size:2.5rem;margin-bottom:2rem}
+.resume-text h2 .gradient{background:linear-gradient(90deg,var(--green),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.resume-text p{color:var(--muted);font-size:1.1rem;line-height:1.8;margin-bottom:1.5rem}
+.contact-section{background:#fafafa;padding:6rem 2rem;text-align:center}
+.contact-section h2{font-family:'Playfair Display',serif;font-size:3rem;margin-bottom:1rem}
+.contact-section h2 .gradient{background:linear-gradient(90deg,var(--green),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.contact-section p{color:var(--muted);font-size:1.1rem;margin-bottom:2rem}
+.contact-info{margin-top:2rem}
+.contact-info a{display:block;font-size:1.2rem;margin-bottom:1rem;text-decoration:none;transition:opacity 0.3s}
+.contact-email{color:var(--green)}.contact-phone{color:var(--text)}.contact-instagram{color:var(--pink)}
+.contact-info a:hover{opacity:0.7}
+footer{text-align:center;padding:3rem 2rem;border-top:1px solid var(--border);color:var(--muted);font-size:0.85rem}
+.lightbox{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.95);z-index:2000;justify-content:center;align-items:center;padding:2rem}
+.lightbox.active{display:flex}
+.lightbox img{max-width:90vw;max-height:90vh;object-fit:contain;border-radius:8px}
+.lightbox-close{position:absolute;top:2rem;right:2rem;color:white;font-size:2.5rem;cursor:pointer;background:none;border:none;font-family:sans-serif}
+@media(max-width:768px){nav{padding:1rem 1.5rem}.nav-links{gap:1.5rem}.hero{padding:8rem 1.5rem 3rem}.gallery{grid-template-columns:1fr}.resume-content{flex-direction:column;gap:2rem}.hero-buttons{flex-direction:column;width:100%;max-width:300px}}
+</style>
+</head>
+<body>
+<header><nav><a href="#" class="logo">YAN<span>G</span></a><ul class="nav-links"><li><a href="#work">Work</a></li><li><a href="#guardian">Guardian</a></li><li><a href="#resume">About</a></li><li><a href="#contact">Contact</a></li></ul></nav></header>
+
+<section class="hero">
+<h1>Form Meets<br><span class="freedom">Freedom</span></h1>
+<p>Geometric precision, raw realism, and fluid abstraction — exploring the full spectrum of visual expression since 1979.</p>
+<div class="hero-buttons"><a href="#work" class="btn-view">View Work</a><a href="#contact" class="btn-touch">Get In Touch</a></div>
+</section>
+
+<section id="work" class="section">
+<h2 class="section-title">Selected <span class="gradient">Works</span></h2>
+<p class="section-subtitle">Click any piece to view in full detail</p>
+<div class="filter-buttons">
+<button class="filter-btn active" onclick="filterAll()">All</button>
+<button class="filter-btn" onclick="filterCat('abstract')">Abstract</button>
+<button class="filter-btn" onclick="filterCat('geometric')">Geometric</button>
+<button class="filter-btn" onclick="filterCat('realism')">Realism</button>
+<button class="filter-btn" onclick="filterCat('pointelism')">Pointelism</button>
+<button class="filter-btn" onclick="filterCat('naive')">Naive</button>
+<button class="filter-btn" onclick="filterCat('naturalism')">Naturalism</button>
+<button class="filter-btn" onclick="filterCat('mypics')">My Pics</button>
+</div>
+<div class="gallery" id="gallery">
+<!-- ABSTRACT -->
+<div class="artwork" onclick="openLightbox('Blues.jpg')" data-category="abstract">
+<div class="img-frame"><img src="Blues.jpg" alt="Blues"></div>
+<div class="artwork-info"><h3>Blues</h3><p>The color of longing, painted in layers that whisper.</p><span class="category-tag">Abstract</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('City_Life.jpg')" data-category="abstract">
+<div class="img-frame"><img src="City_Life.jpg" alt="City Life"></div>
+<div class="artwork-info"><h3>City Life</h3><p>The rhythm of urban existence.</p><span class="category-tag">Abstract</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Dark_Matter.jpg')" data-category="abstract">
+<div class="img-frame"><img src="Dark_Matter.jpg" alt="Dark Matter"></div>
+<div class="artwork-info"><h3>Dark Matter</h3><p>What cannot be seen but holds everything together.</p><span class="category-tag">Abstract</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Fluid_Motion.jpg')" data-category="abstract">
+<div class="img-frame"><img src="Fluid_Motion.jpg" alt="Fluid Motion"></div>
+<div class="artwork-info"><h3>Fluid Motion</h3><p>Where movement becomes stillness.</p><span class="category-tag">Abstract</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Green_Day.jpg')" data-category="abstract">
+<div class="img-frame"><img src="Green_Day.jpg" alt="Green Day"></div>
+<div class="artwork-info"><h3>Green Day</h3><p>Nature's palette in full bloom.</p><span class="category-tag">Abstract</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Horizon.jpg')" data-category="abstract">
+<div class="img-frame"><img src="Horizon.jpg" alt="Horizon"></div>
+<div class="artwork-info"><h3>Horizon</h3><p>The line where earth meets sky.</p><span class="category-tag">Abstract</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Octopus.jpg')" data-category="abstract">
+<div class="img-frame"><img src="Octopus.jpg" alt="Octopus"></div>
+<div class="artwork-info"><h3>Octopus</h3><p>Intelligence wrapped in mystery.</p><span class="category-tag">Abstract</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Purple_Haze.jpg')" data-category="abstract">
+<div class="img-frame"><img src="Purple_Haze.jpg" alt="Purple Haze"></div>
+<div class="artwork-info"><h3>Purple Haze</h3><p>Dreams in violet.</p><span class="category-tag">Abstract</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Storm_in_the_Sea.jpg')" data-category="abstract">
+<div class="img-frame"><img src="Storm_in_the_Sea.jpg" alt="Storm in the Sea"></div>
+<div class="artwork-info"><h3>Storm in the Sea</h3><p>Chaos and beauty in liquid motion.</p><span class="category-tag">Abstract</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Stormy_Day.jpg')" data-category="abstract">
+<div class="img-frame"><img src="Stormy_Day.jpg" alt="Stormy Day"></div>
+<div class="artwork-info"><h3>Stormy Day</h3><p>When the sky paints in greys and golds.</p><span class="category-tag">Abstract</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Wave.jpg')" data-category="abstract">
+<div class="img-frame"><img src="Wave.jpg" alt="Wave"></div>
+<div class="artwork-info"><h3>Wave</h3><p>The ocean's eternal breath.</p><span class="category-tag">Abstract</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Day_and_night.jpg')" data-category="abstract">
+<div class="img-frame"><img src="Day_and_night.jpg" alt="Day and Night"></div>
+<div class="artwork-info"><h3>Day and Night</h3><p>The eternal dance of light and shadow.</p><span class="category-tag">Abstract</span></div>
+</div>
+<!-- GEOMETRIC -->
+<div class="artwork" onclick="openLightbox('Above_the_Clouds.jpg')" data-category="geometric">
+<div class="img-frame"><img src="Above_the_Clouds.jpg" alt="Above the Clouds"></div>
+<div class="artwork-info"><h3>Above the Clouds</h3><p>A dreamscape where gravity surrenders to imagination.</p><span class="category-tag">Geometric</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('B-Boy.jpg')" data-category="geometric">
+<div class="img-frame"><img src="B-Boy.jpg" alt="B-Boy"></div>
+<div class="artwork-info"><h3>B-Boy</h3><p>Frozen motion. The explosive energy of street culture.</p><span class="category-tag">Geometric</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Broken_Heart.jpg')" data-category="geometric">
+<div class="img-frame"><img src="Broken_Heart.jpg" alt="Broken Heart"></div>
+<div class="artwork-info"><h3>Broken Heart</h3><p>Fractured but still beating.</p><span class="category-tag">Geometric</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Cosmos.jpg')" data-category="geometric">
+<div class="img-frame"><img src="Cosmos.jpg" alt="Cosmos"></div>
+<div class="artwork-info"><h3>Cosmos</h3><p>The universe in geometric form.</p><span class="category-tag">Geometric</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Dogs_life.jpg')" data-category="geometric">
+<div class="img-frame"><img src="Dogs_life.jpg" alt="Dogs Life"></div>
+<div class="artwork-info"><h3>Dogs Life</h3><p>Joy in simple geometry.</p><span class="category-tag">Geometric</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Dragon_Eye.jpg')" data-category="geometric">
+<div class="img-frame"><img src="Dragon_Eye.jpg" alt="Dragon Eye"></div>
+<div class="artwork-info"><h3>Dragon Eye</h3><p>The watcher from ancient scales.</p><span class="category-tag">Geometric</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Exploration.jpg')" data-category="geometric">
+<div class="img-frame"><img src="Exploration.jpg" alt="Exploration"></div>
+<div class="artwork-info"><h3>Exploration</h3><p>Mapping the unknown.</p><span class="category-tag">Geometric</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Family.jpg')" data-category="geometric">
+<div class="img-frame"><img src="Family.jpg" alt="Family"></div>
+<div class="artwork-info"><h3>Family</h3><p>Connections that shape us.</p><span class="category-tag">Geometric</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Favorite_Nest.jpg')" data-category="geometric">
+<div class="img-frame"><img src="Favorite_Nest.jpg" alt="Favorite Nest"></div>
+<div class="artwork-info"><h3>Favorite Nest</h3><p>Home in structured form.</p><span class="category-tag">Geometric</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Four_Seasons.jpg')" data-category="geometric">
+<div class="img-frame"><img src="Four_Seasons.jpg" alt="Four Seasons"></div>
+<div class="artwork-info"><h3>Four Seasons</h3><p>Time in repeating patterns.</p><span class="category-tag">Geometric</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Kingdom.jpg')" data-category="geometric">
+<div class="img-frame"><img src="Kingdom.jpg" alt="Kingdom"></div>
+<div class="artwork-info"><h3>Kingdom</h3><p>Rule through form and line.</p><span class="category-tag">Geometric</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('M.t.f.h.jpg')" data-category="geometric">
+<div class="img-frame"><img src="M.t.f.h.jpg" alt="M.T.F.H"></div>
+<div class="artwork-info"><h3>M.T.F.H</h3><p>Encoded meaning in angles.</p><span class="category-tag">Geometric</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('MTOH.jpg')" data-category="geometric">
+<div class="img-frame"><img src="MTOH.jpg" alt="MTOH"></div>
+<div class="artwork-info"><h3>MTOH</h3><p>Structure from abbreviation.</p><span class="category-tag">Geometric</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Piero.jpg')" data-category="geometric">
+<div class="img-frame"><img src="Piero.jpg" alt="Piero"></div>
+<div class="artwork-info"><h3>Piero</h3><p>Named in geometric tribute.</p><span class="category-tag">Geometric</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Saved.jpg')" data-category="geometric">
+<div class="img-frame"><img src="Saved.jpg" alt="Saved"></div>
+<div class="artwork-info"><h3>Saved</h3><p>Rescued by pattern.</p><span class="category-tag">Geometric</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Sky.jpg')" data-category="geometric">
+<div class="img-frame"><img src="Sky.jpg" alt="Sky"></div>
+<div class="artwork-info"><h3>Sky</h3><p>The ceiling of geometry.</p><span class="category-tag">Geometric</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Tree.jpg')" data-category="geometric">
+<div class="img-frame"><img src="Tree.jpg" alt="Tree"></div>
+<div class="artwork-info"><h3>Tree</h3><p>Roots that remember, branches that dream.</p><span class="category-tag">Geometric</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Tree_monster.jpg')" data-category="geometric">
+<div class="img-frame"><img src="Tree_monster.jpg" alt="Tree Monster"></div>
+<div class="artwork-info"><h3>Tree Monster</h3><p>Where the forest whispers back.</p><span class="category-tag">Geometric</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Walk_with_Lobsters.jpg')" data-category="geometric">
+<div class="img-frame"><img src="Walk_with_Lobsters.jpg" alt="Walk with Lobsters"></div>
+<div class="artwork-info"><h3>Walk with Lobsters</h3><p>Surreal companions on life's shore.</p><span class="category-tag">Geometric</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('cat.jpg')" data-category="geometric">
+<div class="img-frame"><img src="cat.jpg" alt="Cat"></div>
+<div class="artwork-info"><h3>Cat</h3><p>Independence personified.</p><span class="category-tag">Geometric</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Daydreams.jpg')" data-category="geometric">
+<div class="img-frame"><img src="Daydreams.jpg" alt="Daydreams"></div>
+<div class="artwork-info"><h3>Daydreams</h3><p>Thoughts in structured form.</p><span class="category-tag">Geometric</span></div>
+</div>
+<!-- REALISM -->
+<div class="artwork" onclick="openLightbox('Artist_at_Work.jpg')" data-category="realism">
+<div class="img-frame"><img src="Artist_at_Work.jpg" alt="Artist at Work"></div>
+<div class="artwork-info"><h3>Artist at Work</h3><p>Creation in real time.</p><span class="category-tag">Realism</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Beautiful_Poet.jpg')" data-category="realism">
+<div class="img-frame"><img src="Beautiful_Poet.jpg" alt="Beautiful Poet"></div>
+<div class="artwork-info"><h3>Beautiful Poet</h3><p>The silent rhythm of words made visible.</p><span class="category-tag">Realism</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Best_friend.jpg')" data-category="realism">
+<div class="img-frame"><img src="Best_friend.jpg" alt="Best Friend"></div>
+<div class="artwork-info"><h3>Best Friend</h3><p>Loyalty without words.</p><span class="category-tag">Realism</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Dancer.jpg')" data-category="realism">
+<div class="img-frame"><img src="Dancer.jpg" alt="Dancer"></div>
+<div class="artwork-info"><h3>Dancer</h3><p>Motion captured in stillness.</p><span class="category-tag">Realism</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Focused_Mind.jpg')" data-category="realism">
+<div class="img-frame"><img src="Focused_Mind.jpg" alt="Focused Mind"></div>
+<div class="artwork-info"><h3>Focused Mind</h3><p>Concentration made visible.</p><span class="category-tag">Realism</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Free_spirit.jpg')" data-category="realism">
+<div class="img-frame"><img src="Free_spirit.jpg" alt="Free Spirit"></div>
+<div class="artwork-info"><h3>Free Spirit</h3><p>Untamed and true.</p><span class="category-tag">Realism</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Mood.jpg')" data-category="realism">
+<div class="img-frame"><img src="Mood.jpg" alt="Mood"></div>
+<div class="artwork-info"><h3>Mood</h3><p>Emotion in honest form.</p><span class="category-tag">Realism</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Mood2.jpg')" data-category="realism">
+<div class="img-frame"><img src="Mood2.jpg" alt="Mood 2"></div>
+<div class="artwork-info"><h3>Mood 2</h3><p>The second wave of feeling.</p><span class="category-tag">Realism</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Portrait.jpg')" data-category="realism">
+<div class="img-frame"><img src="Portrait.jpg" alt="Portrait"></div>
+<div class="artwork-info"><h3>Portrait</h3><p>The face of truth.</p><span class="category-tag">Realism</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Portrait_Session.jpg')" data-category="realism">
+<div class="img-frame"><img src="Portrait_Session.jpg" alt="Portrait Session"></div>
+<div class="artwork-info"><h3>Portrait Session</h3><p>Capturing the soul in stages.</p><span class="category-tag">Realism</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Quiet_Confidence.jpg')" data-category="realism">
+<div class="img-frame"><img src="Quiet_Confidence.jpg" alt="Quiet Confidence"></div>
+<div class="artwork-info"><h3>Quiet Confidence</h3><p>Strength without shouting.</p><span class="category-tag">Realism</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Quiet_Moment.jpg')" data-category="realism">
+<div class="img-frame"><img src="Quiet_Moment.jpg" alt="Quiet Moment"></div>
+<div class="artwork-info"><h3>Quiet Moment</h3><p>Peace in painted form.</p><span class="category-tag">Realism</span></div>
+</div>
+<!-- POINTELISM -->
+<div class="artwork" onclick="openLightbox('Cabbage.jpg')" data-category="pointelism">
+<div class="img-frame"><img src="Cabbage.jpg" alt="Cabbage"></div>
+<div class="artwork-info"><h3>Cabbage</h3><p>Layers of dots becoming life.</p><span class="category-tag">Pointelism</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Chameleon.jpg')" data-category="pointelism">
+<div class="img-frame"><img src="Chameleon.jpg" alt="Chameleon"></div>
+<div class="artwork-info"><h3>Chameleon</h3><p>Color through countless points.</p><span class="category-tag">Pointelism</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Elephant.jpg')" data-category="pointelism">
+<div class="img-frame"><img src="Elephant.jpg" alt="Elephant"></div>
+<div class="artwork-info"><h3>Elephant</h3><p>Memory in dots.</p><span class="category-tag">Pointelism</span></div>
+</div>
+<!-- NAIVE -->
+<div class="artwork" onclick="openLightbox('Horse.jpg')" data-category="naive">
+<div class="img-frame"><img src="Horse.jpg" alt="Horse"></div>
+<div class="artwork-info"><h3>Horse</h3><p>Freedom in simple strokes.</p><span class="category-tag">Naive</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('The_Dreamer.jpg')" data-category="naive">
+<div class="img-frame"><img src="The_Dreamer.jpg" alt="The Dreamer"></div>
+<div class="artwork-info"><h3>The Dreamer</h3><p>Where sleep and waking blur into pure vision.</p><span class="category-tag">Naive</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('The_Storyteller.jpg')" data-category="naive">
+<div class="img-frame"><img src="The_Storyteller.jpg" alt="The Storyteller"></div>
+<div class="artwork-info"><h3>The Storyteller</h3><p>Every line is a sentence, every color a chapter.</p><span class="category-tag">Naive</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('tomorrow.jpg')" data-category="naive">
+<div class="img-frame"><img src="tomorrow.jpg" alt="Tomorrow"></div>
+<div class="artwork-info"><h3>Tomorrow</h3><p>Light that hasn't arrived yet.</p><span class="category-tag">Naive</span></div>
+</div>
+<!-- NATURALISM -->
+<div class="artwork" onclick="openLightbox('chilling.jpg')" data-category="naturalism">
+<div class="img-frame"><img src="chilling.jpg" alt="Chilling"></div>
+<div class="artwork-info"><h3>Chilling</h3><p>The art of stillness.</p><span class="category-tag">Naturalism</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('too_cool.jpg')" data-category="naturalism">
+<div class="img-frame"><img src="too_cool.jpg" alt="Too Cool"></div>
+<div class="artwork-info"><h3>Too Cool</h3><p>Effortless presence.</p><span class="category-tag">Naturalism</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('work.jpg')" data-category="naturalism">
+<div class="img-frame"><img src="work.jpg" alt="Work"></div>
+<div class="artwork-info"><h3>Work</h3><p>The honest labor of creation.</p><span class="category-tag">Naturalism</span></div>
+</div>
+<!-- MY PICS -->
+<div class="artwork" onclick="openLightbox('20260618_175255.jpg')" data-category="mypics">
+<div class="img-frame"><img src="20260618_175255.jpg" alt="Cancers in Love"></div>
+<div class="artwork-info"><h3>Cancers in Love</h3><p>Two souls intertwining in liquid fire.</p><span class="category-tag">My Pics</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('20260618_175333.jpg')" data-category="mypics">
+<div class="img-frame"><img src="20260618_175333.jpg" alt="Cosmic Bloom"></div>
+<div class="artwork-info"><h3>Cosmic Bloom</h3><p>An explosion of stellar color.</p><span class="category-tag">My Pics</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Sculpture_Collection.jpg')" data-category="mypics">
+<div class="img-frame"><img src="Sculpture_Collection.jpg" alt="Sculpture Collection"></div>
+<div class="artwork-info"><h3>Sculpture Collection</h3><p>Three dimensions of vision.</p><span class="category-tag">My Pics</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Studio_Moments.jpg')" data-category="mypics">
+<div class="img-frame"><img src="Studio_Moments.jpg" alt="Studio Moments"></div>
+<div class="artwork-info"><h3>Studio Moments</h3><p>The quiet between creations.</p><span class="category-tag">My Pics</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Yang.jpg')" data-category="mypics">
+<div class="img-frame"><img src="Yang.jpg" alt="Yang"></div>
+<div class="artwork-info"><h3>Yang</h3><p>The artist behind the vision.</p><span class="category-tag">My Pics</span></div>
+</div>
+<div class="artwork" onclick="openLightbox('Young_Visionary.jpg')" data-category="mypics">
+<div class="img-frame"><img src="Young_Visionary.jpg" alt="Young Visionary"></div>
+<div class="artwork-info"><h3>Young Visionary</h3><p>Eyes that see tomorrow.</p><span class="category-tag">My Pics</span></div>
+</div>
+</div>
+</section>
+
+<section id="guardian" class="guardian-section">
+<h2>The <span class="gradient">Guardian</span></h2>
+<p>A watchful presence that guides the creative journey. The guardian sees all, protects all, and inspires all.</p>
+<img src="guardian-frog.png" alt="Guardian Frog" class="guardian-frog-img">
+</section>
+
+<section id="resume" class="resume-section">
+<div class="resume-content">
+<div class="resume-text">
+<h2>About the <span class="gradient">Artist</span></h2>
+<p>Born in Alma-Ata, Kazakhstan in 1979. I picked up a brush and never put it down. My work moves between the rigid beauty of geometric structures, the honest depth of realistic portraiture, and the uncontrolled energy of abstract expression.</p>
+<p>Since 1990, based in Israel, I work across acrylics, charcoal, and mixed media — always chasing the next unexpected combination of form and feeling. Each piece is a conversation between control and chaos.</p>
+<p><strong>Yang</strong></p>
+</div>
+</div>
+</section>
+
+<section id="contact" class="contact-section">
+<h2>Get In <span class="gradient">Touch</span></h2>
+<p>Interested in collaborating or acquiring a piece? Reach out.</p>
+<div class="contact-info">
+<a href="mailto:Yangolovanevsky@gmail.com" class="contact-email">Yangolovanevsky@gmail.com</a>
+<a href="tel:+972506801313" class="contact-phone">+972 50-680-1313</a>
+<a href="https://www.instagram.com/art.yan.g?igsh=MWN4cmlmbnZxaXRjbw==" class="contact-instagram" target="_blank">Instagram</a>
+</div>
+</section>
+
+<footer><p>© 2024 Yang. All rights reserved.</p></footer>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+<button class="lightbox-close">&times;</button>
+<img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+function filterAll() {
+  document.querySelectorAll('.artwork').forEach(el => el.style.display = 'block');
+  document.querySelectorAll('.filter-btn').forEach(el => el.classList.remove('active'));
+  event.target.classList.add('active');
+}
+function filterCat(cat) {
+  document.querySelectorAll('.artwork').forEach(el => {
+    el.style.display = el.dataset.category === cat ? 'block' : 'none';
+  });
+  document.querySelectorAll('.filter-btn').forEach(el => el.classList.remove('active'));
+  event.target.classList.add('active');
+}
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('active');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+}
+</script>
+</body>
+  </html>
